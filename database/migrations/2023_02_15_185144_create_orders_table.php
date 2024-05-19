@@ -17,14 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('trxId')->nullable();
             $table->integer('productId')->nullable();
+            $table->integer('price')->nullable();
             $table->integer('qty')->nullable();
-            $table->string('name')->nullable();
-            $table->decimal('discountedPrice')->nullable();
-            $table->integer('gst')->nullable();
-            $table->integer('deliveryCharge')->nullable();
-            $table->integer('colorId')->nullable();
-            $table->string('colorName')->nullable();
-            $table->string('colorQuality')->nullable();
+            $table->integer('total')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        // Schema::dropIfExists('orders');
     }
 };

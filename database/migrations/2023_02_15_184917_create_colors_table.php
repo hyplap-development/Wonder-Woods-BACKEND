@@ -13,29 +13,29 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('roles')) {
-            Schema::create('roles', function (Blueprint $table) {
+        if (!Schema::hasTable('colors')) {
+            Schema::create('colors', function (Blueprint $table) {
                 $table->id();
+                $table->string('image')->nullable();
                 $table->string('name')->nullable();
-                $table->string('slug')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
                 $table->timestamps();
             });
         }
-
+        
         // add or modify columns
-        Schema::table('roles', function (Blueprint $table) {
-            if (!Schema::hasColumn('roles', 'name')) {
-                $table->string('name')->nullable()->after('id');
+        Schema::table('colors', function (Blueprint $table) {
+            if (!Schema::hasColumn('colors', 'image')) {
+                $table->string('image')->nullable()->after('id');
             }
-            if (!Schema::hasColumn('roles', 'slug')) {
-                $table->string('slug')->nullable()->after('name');
+            if (!Schema::hasColumn('colors', 'name')) {
+                $table->string('name')->nullable()->after('image');
             }
-            if (!Schema::hasColumn('roles', 'status')) {
-                $table->boolean('status')->default(1)->after('slug');
+            if (!Schema::hasColumn('colors', 'status')) {
+                $table->boolean('status')->default(1)->after('name');
             }
-            if (!Schema::hasColumn('roles', 'deleteId')) {
+            if (!Schema::hasColumn('colors', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');
             }
         });
@@ -48,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('roles');
+        // Schema::dropIfExists('colors');
     }
 };

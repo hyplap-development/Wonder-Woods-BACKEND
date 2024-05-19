@@ -13,25 +13,39 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('userId')->nullable();
-            $table->string('name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('address1')->nullable();
-            $table->string('address2')->nullable();
-            $table->integer('stateId')->nullable();
-            $table->string('state')->nullable();
-            $table->integer('cityId')->nullable();
-            $table->string('city')->nullable();
-            $table->string('pincode')->nullable();
-            $table->string('total')->nullable();
-            $table->string('gst')->nullable();
-            $table->string('deliveryCharge')->nullable();
-            $table->string('grandTotal')->nullable();
-            $table->string('orderStatus')->nullable();
-            $table->timestamps();
+        if (!Schema::hasTable('transactions')) {
+            Schema::create('transactions', function (Blueprint $table) {
+                $table->id();
+                $table->integer('userId')->nullable();
+                $table->string('addressId')->nullable();
+                $table->integer('total')->nullable();
+                $table->integer('deliveryCharge')->nullable();
+                $table->integer('grandTotal')->nullable();
+                $table->string('status')->default('pending');
+                $table->timestamps();
+            });
+        }
+        
+        // add or modify columns
+        Schema::table('transactions', function (Blueprint $table) {
+            if (!Schema::hasColumn('transactions', 'userId')) {
+                $table->integer('userId')->nullable()->after('id');
+            }
+            if (!Schema::hasColumn('transactions', 'addressId')) {
+                $table->string('addressId')->nullable()->after('userId');
+            }
+            if (!Schema::hasColumn('transactions', 'total')) {
+                $table->integer('total')->nullable()->after('addressId');
+            }
+            if (!Schema::hasColumn('transactions', 'deliveryCharge')) {
+                $table->integer('deliveryCharge')->nullable()->after('total');
+            }
+            if (!Schema::hasColumn('transactions', 'grandTotal')) {
+                $table->integer('grandTotal')->nullable()->after('deliveryCharge');
+            }
+            if (!Schema::hasColumn('transactions', 'status')) {
+                $table->string('status')->default('pending')->after('grandTotal');
+            }
         });
     }
 
@@ -42,6 +56,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        // Schema::dropIfExists('transactions');
     }
 };

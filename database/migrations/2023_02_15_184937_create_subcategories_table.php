@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('roles')) {
-            Schema::create('roles', function (Blueprint $table) {
+        if (!Schema::hasTable('subcategories')) {
+            Schema::create('subcategories', function (Blueprint $table) {
                 $table->id();
+                $table->string('image')->nullable();
+                $table->integer('categoryId')->nullable();
                 $table->string('name')->nullable();
                 $table->string('slug')->nullable();
                 $table->boolean('status')->default(1);
@@ -25,17 +27,23 @@ return new class extends Migration
         }
 
         // add or modify columns
-        Schema::table('roles', function (Blueprint $table) {
-            if (!Schema::hasColumn('roles', 'name')) {
-                $table->string('name')->nullable()->after('id');
+        Schema::table('subcategories', function (Blueprint $table) {
+            if (!Schema::hasColumn('subcategories', 'image')) {
+                $table->string('image')->nullable()->after('id');
             }
-            if (!Schema::hasColumn('roles', 'slug')) {
+            if (!Schema::hasColumn('subcategories', 'categoryId')) {
+                $table->integer('categoryId')->nullable()->after('image');
+            }
+            if (!Schema::hasColumn('subcategories', 'name')) {
+                $table->string('name')->nullable()->after('categoryId');
+            }
+            if (!Schema::hasColumn('subcategories', 'slug')) {
                 $table->string('slug')->nullable()->after('name');
             }
-            if (!Schema::hasColumn('roles', 'status')) {
+            if (!Schema::hasColumn('subcategories', 'status')) {
                 $table->boolean('status')->default(1)->after('slug');
             }
-            if (!Schema::hasColumn('roles', 'deleteId')) {
+            if (!Schema::hasColumn('subcategories', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');
             }
         });
@@ -48,6 +56,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('roles');
+        // Schema::dropIfExists('subcategories');
     }
 };

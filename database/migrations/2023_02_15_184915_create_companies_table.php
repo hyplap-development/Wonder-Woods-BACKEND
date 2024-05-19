@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('roles')) {
-            Schema::create('roles', function (Blueprint $table) {
+        if (!Schema::hasTable('companies')) {
+            Schema::create('companies', function (Blueprint $table) {
                 $table->id();
+                $table->string('logo')->nullable();
                 $table->string('name')->nullable();
-                $table->string('slug')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
                 $table->timestamps();
@@ -25,17 +25,17 @@ return new class extends Migration
         }
 
         // add or modify columns
-        Schema::table('roles', function (Blueprint $table) {
-            if (!Schema::hasColumn('roles', 'name')) {
-                $table->string('name')->nullable()->after('id');
+        Schema::table('companies', function (Blueprint $table) {
+            if (!Schema::hasColumn('companies', 'logo')) {
+                $table->string('logo')->nullable()->after('id');
             }
-            if (!Schema::hasColumn('roles', 'slug')) {
-                $table->string('slug')->nullable()->after('name');
+            if (!Schema::hasColumn('companies', 'name')) {
+                $table->string('name')->nullable()->after('logo');
             }
-            if (!Schema::hasColumn('roles', 'status')) {
-                $table->boolean('status')->default(1)->after('slug');
+            if (!Schema::hasColumn('companies', 'status')) {
+                $table->boolean('status')->default(1)->after('name');
             }
-            if (!Schema::hasColumn('roles', 'deleteId')) {
+            if (!Schema::hasColumn('companies', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');
             }
         });
@@ -48,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('roles');
+        // Schema::dropIfExists('companies');
     }
 };

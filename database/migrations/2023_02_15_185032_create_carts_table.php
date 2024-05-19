@@ -13,11 +13,31 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('userId')->nullable();
-            $table->integer('productId')->nullable();
-            $table->timestamps();
+        if (!Schema::hasTable('carts')) {
+            Schema::create('carts', function (Blueprint $table) {
+                $table->id();
+                $table->integer('userId')->nullable();
+                $table->integer('productId')->nullable();
+                $table->integer('price')->nullable();
+                $table->integer('qty')->nullable();
+                $table->timestamps();
+            });
+        }
+        
+        // add or modify columns
+        Schema::table('carts', function (Blueprint $table) {
+            if (!Schema::hasColumn('carts', 'userId')) {
+                $table->integer('userId')->nullable()->after('id');
+            }
+            if (!Schema::hasColumn('carts', 'productId')) {
+                $table->integer('productId')->nullable()->after('userId');
+            }
+            if (!Schema::hasColumn('carts', 'price')) {
+                $table->integer('price')->nullable()->after('productId');
+            }
+            if (!Schema::hasColumn('carts', 'qty')) {
+                $table->integer('qty')->nullable()->after('price');
+            }
         });
     }
 
@@ -28,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        // Schema::dropIfExists('carts');
     }
 };

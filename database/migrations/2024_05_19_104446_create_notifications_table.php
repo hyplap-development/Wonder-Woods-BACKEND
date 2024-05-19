@@ -13,26 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('wishlists')) {
-            Schema::create('wishlists', function (Blueprint $table) {
+        if (!Schema::hasTable('notifications')) {
+            Schema::create('notifications', function (Blueprint $table) {
                 $table->id();
                 $table->integer('userId')->nullable();
-                $table->integer('productId')->nullable();
-                $table->integer('price')->nullable();
+                $table->string('title')->nullable();
+                $table->string('message')->nullable();
                 $table->timestamps();
             });
         }
-
+        
         // add or modify columns
-        Schema::table('wishlists', function (Blueprint $table) {
-            if (!Schema::hasColumn('wishlists', 'userId')) {
+        Schema::table('notifications', function (Blueprint $table) {
+            if (!Schema::hasColumn('notifications', 'userId')) {
                 $table->integer('userId')->nullable()->after('id');
             }
-            if (!Schema::hasColumn('wishlists', 'productId')) {
-                $table->integer('productId')->nullable()->after('userId');
+            if (!Schema::hasColumn('notifications', 'title')) {
+                $table->string('title')->nullable()->after('userId');
             }
-            if (!Schema::hasColumn('wishlists', 'price')) {
-                $table->integer('price')->nullable()->after('productId');
+            if (!Schema::hasColumn('notifications', 'message')) {
+                $table->string('message')->nullable()->after('title');
             }
         });
     }
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('wishlists');
+        // Schema::dropIfExists('notifications');
     }
 };

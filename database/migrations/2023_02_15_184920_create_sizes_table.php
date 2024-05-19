@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('roles')) {
-            Schema::create('roles', function (Blueprint $table) {
+        if (!Schema::hasTable('sizes')) {
+            Schema::create('sizes', function (Blueprint $table) {
                 $table->id();
                 $table->string('name')->nullable();
-                $table->string('slug')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
                 $table->timestamps();
@@ -25,17 +24,14 @@ return new class extends Migration
         }
 
         // add or modify columns
-        Schema::table('roles', function (Blueprint $table) {
-            if (!Schema::hasColumn('roles', 'name')) {
+        Schema::table('sizes', function (Blueprint $table) {
+            if (!Schema::hasColumn('sizes', 'name')) {
                 $table->string('name')->nullable()->after('id');
             }
-            if (!Schema::hasColumn('roles', 'slug')) {
-                $table->string('slug')->nullable()->after('name');
+            if (!Schema::hasColumn('sizes', 'status')) {
+                $table->boolean('status')->default(1)->after('name');
             }
-            if (!Schema::hasColumn('roles', 'status')) {
-                $table->boolean('status')->default(1)->after('slug');
-            }
-            if (!Schema::hasColumn('roles', 'deleteId')) {
+            if (!Schema::hasColumn('sizes', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');
             }
         });
@@ -48,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('roles');
+        // Schema::dropIfExists('sizes');
     }
 };
