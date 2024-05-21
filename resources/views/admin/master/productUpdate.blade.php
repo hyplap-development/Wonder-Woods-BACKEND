@@ -29,8 +29,8 @@ Update Product
                         <input type="hidden" name="imageIds[]" value="{{$productimages->id}}">
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-3 text-center">
                             <!-- <img src="{{asset($productimages->image)}}" onerror="this.onerror=null;this.src='/media/imageNotAdded.jpg'" alt="" style="height: 100%; width: 100%; border-radius: 5px;"> -->
-                            <div class="image-input image-input-outline" id="image_input{{$productimages->id}}" style=" background-image: url(/media/imgBack.png)">
-                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(/{{$productimages->image != null ? $productimages->image : '/media/imgBack.png'}})"></div>
+                            <div class="image-input image-input-outline" id="image_input{{$productimages->id}}" style=" background-image: url('/media/blank-image.svg')">
+                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(/{{$productimages->image != null ? $productimages->image : '/media/blank-image.svg'}})"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
@@ -105,8 +105,8 @@ Update Product
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 text-center mb-5">
-                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url(/media/imgBack.png)">
-                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url(/{{$product->image != null ? $product->image : '/media/imgBack.png'}})"></div>
+                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url('/media/blank-image.svg')">
+                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url(/{{$product->image != null ? $product->image : '/media/blank-image.svg'}})"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
@@ -393,8 +393,8 @@ Update Product
 
         // add new block
         var newBlock = '<div class="col-sm-12 col-md-6 col-lg-3 mt-3 text-center">\
-        <div class="image-input image-input-outline" id="image_input2' + counter + '" style=" background-image: url(/media/imgBack.png)">\
-                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(/media/imgBack.png)"></div>\
+        <div class="image-input image-input-outline" id="image_input2' + counter + '" style=" background-image: url('/media/blank-image.svg')">\
+                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url('/media/blank-image.svg')"></div>\
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">\
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>\
                                     <input type="file" name="image[]" accept=".png, .jpg, .jpeg, .webp" />\

@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->id();
                 $table->string('logo')->nullable();
                 $table->string('name')->nullable();
+                $table->string('slug')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
                 $table->timestamps();
@@ -32,8 +33,11 @@ return new class extends Migration
             if (!Schema::hasColumn('companies', 'name')) {
                 $table->string('name')->nullable()->after('logo');
             }
+            if (!Schema::hasColumn('companies', 'slug')) {
+                $table->string('slug')->nullable()->after('name');
+            }
             if (!Schema::hasColumn('companies', 'status')) {
-                $table->boolean('status')->default(1)->after('name');
+                $table->boolean('status')->default(1)->after('slug');
             }
             if (!Schema::hasColumn('companies', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');

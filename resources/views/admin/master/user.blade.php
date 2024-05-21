@@ -34,8 +34,6 @@ Office User
             </div>
             <div class="card-toolbar">
                 <button type="button" id="createBtn" class="btn btn-primary btn-lg m-4 has-ripple d-flex align-items-center" data-toggle="modal" data-target="#addModal">
-                    <lord-icon class="mr-2" src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover" colors="primary:#ffffff" target="#createBtn" style="width:25px;height:25px">
-                    </lord-icon>
                     <span>Create User</span>
                 </button>
             </div>
@@ -182,8 +180,6 @@ Office User
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" id="delYes" class="btn btn-danger">
-                                            <lord-icon src="https://cdn.lordicon.com/dovoajyj.json" trigger="hover" target="#delYes" colors="primary:#FFFFFF" style="width:25px;height:25px">
-                                            </lord-icon>
                                             Yes
                                         </button>
                                     </div>
@@ -302,8 +298,6 @@ Office User
                     <div class="modal-footer m-0 p-0 pt-3">
                         <!-- <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button> -->
                         <button type="submit" id="addBtn" class="btn btn-primary font-weight-bold">
-                            <lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="hover" target="#addBtn" colors="primary:#FFFFFF,secondary:#FFFFFF" style="width:35px;height:35px">
-                            </lord-icon>
                             Add User
                         </button>
                     </div>

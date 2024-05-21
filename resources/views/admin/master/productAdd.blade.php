@@ -54,8 +54,8 @@ Add Product
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 text-center mb-5">
-                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url(/media/imgBack.png)">
-                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url(/media/imgBack.png)"></div>
+                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url('/media/blank-image.svg')">
+                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url('/media/blank-image.svg')"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>

@@ -14,30 +14,28 @@ Company
 
 <div class=" col-sm-12 text-right">
     <button type="button" id="createBtn" class="btn btn-primary btn-lg m-4 has-ripple" data-toggle="modal" data-target="#addModal">
-        <lord-icon src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover" colors="primary:#ffffff" target="#createBtn" style="width:25px;height:25px">
-        </lord-icon>
         Create Company
     </button>
 </div>
 
 <!--Create Modal-->
 <div class="modal fade" id="addModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Company</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <lord-icon src="https://cdn.lordicon.com/vfzqittk.json" trigger="hover" state="hover-2" colors="primary:#000000" style="width:35px;height:35px">
-                    </lord-icon>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form autocomplete="off" action="{{url('admin/company/add')}}" enctype="multipart/form-data" method="post">
-                    @csrf
+    <div class="modal-dialog modal-md" role="document">
+        <form autocomplete="off" action="{{url('admin/company/add')}}" enctype="multipart/form-data" method="post">
+            @csrf
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <lord-icon src="https://cdn.lordicon.com/vfzqittk.json" trigger="hover" state="hover-2" colors="primary:#000000" style="width:35px;height:35px">
+                        </lord-icon>
+                    </button>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12 text-center mb-5">
-                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url(/media/imgBack.png)">
-                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url(/media/imgBack.png)"></div>
+                            <div class="image-input image-input-outline" id="image_input" style=" background-image: url('/media/blank-image.svg')">
+                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url('/media/blank-image.svg')"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
@@ -57,7 +55,7 @@ Company
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="Name" name="name" onkeyup="checkName()"   required>
+                                <input type="text" class="form-control" id="Name" name="name" onkeyup="checkName()" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -70,17 +68,14 @@ Company
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer m-0 p-0 pt-3">
-                        <!-- <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button> -->
-                        <button type="submit" id="addBtn" class="btn btn-primary font-weight-bold">
-                            <lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="hover" target="#addBtn" colors="primary:#FFFFFF,secondary:#FFFFFF" style="width:35px;height:35px">
-                            </lord-icon>
-                            Add Company
-                        </button>
-                    </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="addBtn" class="btn btn-primary font-weight-bold">
+                        Add Company
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -168,7 +163,7 @@ Company
                                             <div class="col-sm-12 text-center mb-5">
                                                 <div class="image-input image-input-outline" id="image_input1" style="">
 
-                                                    <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url( /{{$data->logo != null ? $data->logo : '/media/imgBack.png'}} )"></div>
+                                                    <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url( /{{$data->logo != null ? $data->logo : '/media/blank-image.svg'}} )"></div>
                                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                                         <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
                                                         <input type="file" name="image" accept=".png, .jpg, .jpeg, .webp" />
@@ -188,7 +183,7 @@ Company
                                                 <div class="form-group">
                                                     <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
                                                     <input type="hidden" id="hiddenName{{$data->id}}" value="{{$data->name}}">
-                                                    <input type="text" class="form-control" id="Name" name="name" onkeyup="checkName('{{$data->id}}')" value="{{$data->name}}"   required>
+                                                    <input type="text" class="form-control" id="Name" name="name" onkeyup="checkName('{{$data->id}}')" value="{{$data->name}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -204,8 +199,6 @@ Company
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" id="updateBtn{{$data->id}}" class="btn btn-primary btngld">
-                                            <lord-icon src="https://cdn.lordicon.com/wloilxuq.json" trigger="hover" disabled target="#updateBtn{{$data->id}}" colors="primary:#FFFFFF" state="hover-2" style="width:35px;height:35px">
-                                            </lord-icon>
                                             Update
                                         </button>
                                     </div>
@@ -234,8 +227,6 @@ Company
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" id="delYes" class="btn btn-danger">
-                                            <lord-icon src="https://cdn.lordicon.com/dovoajyj.json" trigger="hover" target="#delYes" colors="primary:#FFFFFF" style="width:25px;height:25px">
-                                            </lord-icon>
                                             Yes
                                         </button>
                                     </div>
