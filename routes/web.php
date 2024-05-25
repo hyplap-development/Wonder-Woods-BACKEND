@@ -60,6 +60,48 @@ Route::prefix('admin')->group(function () {
             Route::post('delete', [AdminController::class, 'deleteCompany']);
         });
 
+        // Color
+        Route::group([
+            'prefix' => 'color'
+        ], function () {
+            Route::get('', [AdminController::class, 'indexColor']);
+            Route::post('add', [AdminController::class, 'addColor']);
+            Route::post('update', [AdminController::class, 'updateColor']);
+            Route::post('delete', [AdminController::class, 'deleteColor']);
+        });
+
+        // Size
+        Route::group([
+            'prefix' => 'size'
+        ], function () {
+            Route::get('', [AdminController::class, 'indexSize']);
+            Route::post('add', [AdminController::class, 'addSize']);
+            Route::post('update', [AdminController::class, 'updateSize']);
+            Route::post('delete', [AdminController::class, 'deleteSize']);
+        });
+
+        // Gst
+        Route::group([
+            'prefix' => 'gst'
+        ], function () {
+            Route::get('', [AdminController::class, 'indexGst']);
+            Route::post('add', [AdminController::class, 'addGst']);
+            Route::post('update', [AdminController::class, 'updateGst']);
+            Route::post('delete', [AdminController::class, 'deleteGst']);
+        });
+
+        // Room
+        Route::group([
+            'prefix' => 'room'
+        ], function () {
+            Route::get('', [AdminController::class, 'indexRoom']);
+            Route::post('add', [AdminController::class, 'addRoom']);
+            Route::post('update', [AdminController::class, 'updateRoom']);
+            Route::post('delete', [AdminController::class, 'deleteRoom']);
+        });
+
+
+
         //Category
         Route::group([
             'prefix' => 'category'
@@ -68,8 +110,6 @@ Route::prefix('admin')->group(function () {
             Route::post('add', [AdminController::class, 'addCategory']);
             Route::post('update', [AdminController::class, 'updateCategory']);
             Route::post('delete', [AdminController::class, 'deleteCategory']);
-            Route::get('exportExcel', [AdminController::class, 'exportCategory']);
-            Route::post('importExcel', [AdminController::class, 'importCategory']);
         });
 
         // Sub Category
@@ -80,8 +120,6 @@ Route::prefix('admin')->group(function () {
             Route::post('add', [AdminController::class, 'addSubCategory']);
             Route::post('update', [AdminController::class, 'updateSubCategory']);
             Route::post('delete', [AdminController::class, 'deleteSubCategory']);
-            // Route::get('exportExcel', [AdminController::class, 'exportSubCategory']);
-            Route::post('importExcel', [AdminController::class, 'importSubCategory']);
         });
 
         //Product
@@ -96,8 +134,6 @@ Route::prefix('admin')->group(function () {
             Route::post('saveImages', [AdminController::class, 'saveImages']);
             Route::post('update', [AdminController::class, 'updateProduct']);
             Route::post('delete', [AdminController::class, 'deleteProduct']);
-            Route::get('exportExcel', [AdminController::class, 'exportProduct']);
-            Route::post('importExcel', [AdminController::class, 'importProduct']);
         });
 
         // Transactions

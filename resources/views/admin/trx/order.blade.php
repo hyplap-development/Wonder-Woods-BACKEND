@@ -74,12 +74,10 @@ if ($transaction->orderStatus == 'In Process') {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $i = 1;
-                    ?>
+                    
                     @foreach($orders as $data)
                     <tr>
-                        <td class="align-middle text-center">{{$i++}}</td>
+                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center">{{$data->name}} </td>
                         <td class="align-middle text-center">{{$data->qty}} </td>
                         <td class="align-middle text-center">{{$data->discountedPrice}}</td>

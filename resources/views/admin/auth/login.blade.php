@@ -30,7 +30,7 @@ Admin Login
                 <input class="form-control form-control-solid h-auto py-5 px-6" type="password" placeholder="Password" name="password" id="Password" autocomplete="off" />
             </div>
             <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
-                <a href="javascript:;" class="text-dark-50 text-hover-primary my-3 mr-2" id="kt_login_forgot">Forgot Password ?</a>
+                <!-- <a href="javascript:;" class="text-dark-50 text-hover-primary my-3 mr-2" id="kt_login_forgot">Forgot Password ?</a> -->
                 <button type="button" id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3">Sign In</button>
             </div>
         </form>

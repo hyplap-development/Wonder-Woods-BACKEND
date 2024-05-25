@@ -36,12 +36,10 @@ All Transactions
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $i = 1;
-                    ?>
+                    
                     @foreach($transactions as $data)
                     <tr>
-                        <td class="align-middle text-center">{{$i++}}</td>
+                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center">{{$data->grandTotal}}</td>
                         <td class="align-middle text-center">{{$data->name}} <br> {{$data->phone}} <br> {{$data->email}} </td>
                         <td class="align-middle text-center">{{$data->address1}}</td>

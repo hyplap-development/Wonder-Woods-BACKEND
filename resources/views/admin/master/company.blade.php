@@ -119,14 +119,12 @@ Company
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $i = 1;
-                    ?>
+
                     @foreach($companies as $data)
                     <tr>
-                        <td class="align-middle text-center">{{$i++}}</td>
+                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center">
-                            <img src="/{{$data->logo}}" onerror="this.onerror=null;this.src='/media/imageNotAdded.jpg'" style="border-radius: 5px;" alt="" width="50px" height="50px">
+                            <img src="/{{$data->logo}}" onerror="this.onerror=null;this.src='/media/blank-image.svg'" style="border-radius: 5px;" alt="" width="50px" height="50px">
                         </td>
                         <td class="align-middle text-center">{{$data->name}}</td>
                         <td class="align-middle text-center">
@@ -155,15 +153,19 @@ Company
                                         </lord-icon>
                                     </button>
                                 </div>
+                                <?php
+                                $image = $data->logo != null ? $data->logo : '/media/blank-image.svg';
+                                ?>
+
                                 <form action="{{url('admin/company/update')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
                                         <input type="hidden" value="{{$data->id}}" name="hiddenId">
                                         <div class="row">
                                             <div class="col-sm-12 text-center mb-5">
-                                                <div class="image-input image-input-outline" id="image_input1" style="">
+                                                <div class="image-input image-input-outline" id="image_input1{{$data->id}}" style=" background-image: url('/{{$image}}')">
 
-                                                    <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url( /{{$data->logo != null ? $data->logo : '/media/blank-image.svg'}} )"></div>
+                                                    <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url('/{{$image}}')"></div>
                                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                                         <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
                                                         <input type="file" name="image" accept=".png, .jpg, .jpeg, .webp" />

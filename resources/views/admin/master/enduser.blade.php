@@ -14,8 +14,6 @@ End Users
 
 <div class=" col-sm-12 text-right">
     <button type="button" id="createBtn" class="btn btn-primary btn-lg m-4 has-ripple" data-toggle="modal" data-target="#addModal">
-        <lord-icon src="https://cdn.lordicon.com/dklbhvrt.json" trigger="hover" colors="primary:#ffffff" target="#createBtn" style="width:25px;height:25px">
-        </lord-icon>
         Create User
     </button>
 </div>
@@ -38,7 +36,7 @@ End Users
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="Name" name="name" minlength="3"  required>
+                                <input type="text" class="form-control" id="Name" name="name" minlength="3" required>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -111,8 +109,6 @@ End Users
                     <div class="modal-footer m-0 p-0 pt-3">
                         <!-- <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button> -->
                         <button type="submit" id="addBtn" disabled class="btn btn-primary font-weight-bold">
-                            <lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="hover" target="#addBtn" colors="primary:#FFFFFF,secondary:#FFFFFF" style="width:35px;height:35px">
-                            </lord-icon>
                             Add User
                         </button>
                     </div>
@@ -146,13 +142,6 @@ End Users
             <div class="card-title">
                 <h3 class="card-label">End Users </h3>
             </div>
-            <div class="card-toolbar">
-                <a href="{{url('admin/enduser/exportEndUserExcel')}}" id="addExcel" class="btn btn-primary has-ripple">
-                    <lord-icon src="https://cdn.lordicon.com/osqwjgzg.json" trigger="hover" colors="primary:#ffffff" target="#addExcel" style="width:25px;height:25px">
-                    </lord-icon>
-                    Export Excel
-                </a>
-            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered table-hover table-responsive-lg" id="tabdata" style="margin-top: 13px !important">
@@ -168,12 +157,10 @@ End Users
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $i = 1;
-                    ?>
+                    
                     @foreach($enduser as $data)
                     <tr>
-                        <td class="align-middle text-center">{{$i++}}</td>
+                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center">{{$data->name}}</td>
                         <td class="align-middle text-center">{{$data->email}}</td>
                         <td class="align-middle text-center">{{$data->phone}}</td>
@@ -214,6 +201,7 @@ End Users
                                                 padding: 10px;
                                                 box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                                             }
+
                                             /* enlarge card */
                                             .modal-card-border:hover {
                                                 transform: scale(1.05);
@@ -269,7 +257,7 @@ End Users
                             </div>
                         </div>
                     </div>
-                    <!-- end delete modal -->
+                    <!-- end address modal -->
 
                     <!-- update modal -->
                     <div class="modal fade" id="updateModal{{$data->id}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -290,7 +278,7 @@ End Users
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
-                                                    <input type="text" class="form-control" id="Name{{$data->id}}" name="name" minlength="3"  value="{{$data->name}}" required>
+                                                    <input type="text" class="form-control" id="Name{{$data->id}}" name="name" minlength="3" value="{{$data->name}}" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -322,8 +310,6 @@ End Users
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" id="updateBtn{{$data->id}}" class="btn btn-primary btngld">
-                                            <lord-icon src="https://cdn.lordicon.com/wloilxuq.json" trigger="hover" disabled target="#updateBtn{{$data->id}}" colors="primary:#FFFFFF" state="hover-2" style="width:35px;height:35px">
-                                            </lord-icon>
                                             Update
                                         </button>
                                     </div>
@@ -352,8 +338,6 @@ End Users
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" id="delYes" class="btn btn-danger">
-                                            <lord-icon src="https://cdn.lordicon.com/dovoajyj.json" trigger="hover" target="#delYes" colors="primary:#FFFFFF" style="width:25px;height:25px">
-                                            </lord-icon>
                                             Yes
                                         </button>
                                     </div>

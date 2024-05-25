@@ -52,7 +52,7 @@
     <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
         <!--begin::Logo-->
         <a href="{{url('admin/dashboard')}}">
-            <img alt="Logo" src="/webassets/images/logo/logo.svg"  style="height: 70px;"/>
+            <img alt="Logo" src="/webassets/images/logo/logo.svg" style="height: 70px;" />
         </a>
         <!--end::Logo-->
         <!--begin::Toolbar-->
@@ -90,7 +90,7 @@
                 <div class="brand flex-column-auto" id="kt_brand">
                     <!--begin::Logo-->
                     <a href="{{url('admin/dashboard')}}" class="brand-logo">
-                        <img alt="Logo" src="/webassets/images/logo/logo.svg" onerror="this.onerror=null;this.src='/webassets/images/logo/logo.svg'" style="height: 70px;"/>
+                        <img alt="Logo" src="/webassets/images/logo/logo.svg" onerror="this.onerror=null;this.src='/webassets/images/logo/logo.svg'" style="height: 70px;" />
                     </a>
                     <!--end::Logo-->
                     <!--begin::Toggle-->
@@ -133,7 +133,7 @@
                             </li>
 
 
-                            <li class="menu-item menu-item-submenu {{ Request::is('admin/user*', 'admin/company*', 'admin/category*', 'admin/subcategory*', 'admin/product*')  ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                            <li class="menu-item menu-item-submenu {{ Request::is('admin/user*', 'admin/company*', 'admin/color*', 'admin/size*', 'admin/gst*', 'admin/room*', 'admin/category*', 'admin/subcategory*', 'admin/product*')  ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                                 <a href="javascript:;" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -155,73 +155,84 @@
                                                 <span class="menu-text">Master Data</span>
                                             </span>
                                         </li>
+
                                         <li class="menu-item {{ Request::is('admin/user*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                             <a href="{{url('admin/user')}}" class="menu-link">
-                                                <span class="svg-icon menu-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
                                                 <span class="menu-text">Office Users</span>
                                             </a>
                                         </li>
+
                                         <li class="menu-item {{ Request::is('admin/company*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                             <a href="{{url('admin/company')}}" class="menu-link">
-                                                <span class="svg-icon menu-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
                                                 <span class="menu-text">Company</span>
                                             </a>
                                         </li>
+
+                                        <li class="menu-item {{ Request::is('admin/color*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                            <a href="{{url('admin/color')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Color</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item {{ Request::is('admin/size*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                            <a href="{{url('admin/size')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Size</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item {{ Request::is('admin/gst*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                            <a href="{{url('admin/gst')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Gst</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu-item {{ Request::is('admin/room*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                            <a href="{{url('admin/room')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text">Rooms</span>
+                                            </a>
+                                        </li>
+
                                         <li class="menu-item {{ Request::is('admin/category*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                             <a href="{{url('admin/category')}}" class="menu-link">
-                                                <span class="svg-icon menu-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
                                                 <span class="menu-text">Category</span>
                                             </a>
                                         </li>
+
                                         <li class="menu-item {{ Request::is('admin/subcategory*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                             <a href="{{url('admin/subcategory')}}" class="menu-link">
-                                                <span class="svg-icon menu-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
                                                 <span class="menu-text">Sub Category</span>
                                             </a>
                                         </li>
+
                                         <li class="menu-item {{ Request::is('admin/product*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                             <a href="{{url('admin/product')}}" class="menu-link">
-                                                <span class="svg-icon menu-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
                                                 <span class="menu-text">Product</span>
                                             </a>
                                         </li>
@@ -260,60 +271,9 @@
                                                 <span class="menu-text">Users</span>
                                             </a>
                                         </li>
-                                        <li class="menu-item {{ Request::is('admin/enquiries*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                            <a href="{{url('admin/enquiries')}}" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Enquiries</span>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                             </li>
-
-                            <!-- <li class="menu-item menu-item-submenu {{ Request::is('admin/enquiry/recent*','admin/enquiry/all*') ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="javascript:;" class="menu-link menu-toggle">
-                                    <span class="svg-icon menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path d="M5,5 L5,15 C5,15.5948613 5.25970314,16.1290656 5.6719139,16.4954176 C5.71978107,16.5379595 5.76682388,16.5788906 5.81365532,16.6178662 C5.82524933,16.6294602 15,7.45470952 15,7.45470952 C15,6.9962515 15,6.17801499 15,5 L5,5 Z M5,3 L15,3 C16.1045695,3 17,3.8954305 17,5 L17,15 C17,17.209139 15.209139,19 13,19 L7,19 C4.790861,19 3,17.209139 3,15 L3,5 C3,3.8954305 3.8954305,3 5,3 Z" fill="#000000" fill-rule="nonzero" transform="translate(10.000000, 11.000000) rotate(-315.000000) translate(-10.000000, -11.000000)" />
-                                                <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3" />
-                                            </g>
-                                        </svg>
-                                    </span>
-                                    <span class="menu-text">Enquiry</span>
-                                    <i class="menu-arrow"></i>
-                                </a>
-                                <div class="menu-submenu">
-                                    <i class="menu-arrow"></i>
-                                    <ul class="menu-subnav">
-                                        <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                            <span class="menu-link">
-                                                <span class="menu-text">Enquiry</span>
-                                            </span>
-                                        </li>
-                                        <li class="menu-item {{ Request::is('admin/enquiry/recent*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                            <a href="admin/enquiry/recent" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">Recent</span>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item {{ Request::is('admin/enquiry/all*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                            <a href="admin/enquiry/all" class="menu-link">
-                                                <i class="menu-bullet menu-bullet-dot">
-                                                    <span></span>
-                                                </i>
-                                                <span class="menu-text">All</span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </li> -->
 
                             <li class="menu-section">
                                 <h4 class="menu-text">Transactions</h4>
@@ -354,8 +314,8 @@
                                     <span class="menu-text">Banner</span>
                                 </a>
                             </li>
-                            <!-- <li class="menu-item {{ Request::is('admin/testimonial*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                                <a href="{{url('/admin/testimonial')}}" class="menu-link">
+                            <li class="menu-item {{ Request::is('admin/inventory*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                <a href="{{url('/admin/inventory')}}" class="menu-link">
                                     <span class="svg-icon menu-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -365,9 +325,9 @@
                                             </g>
                                         </svg>
                                     </span>
-                                    <span class="menu-text">Testimonials</span>
+                                    <span class="menu-text">Inventory</span>
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </div>

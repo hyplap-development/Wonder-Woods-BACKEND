@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('colors')) {
             Schema::create('colors', function (Blueprint $table) {
                 $table->id();
-                $table->string('image')->nullable();
+                $table->string('code')->nullable();
                 $table->string('name')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
@@ -26,11 +26,11 @@ return new class extends Migration
         
         // add or modify columns
         Schema::table('colors', function (Blueprint $table) {
-            if (!Schema::hasColumn('colors', 'image')) {
-                $table->string('image')->nullable()->after('id');
+            if (!Schema::hasColumn('colors', 'code')) {
+                $table->string('code')->nullable()->after('id');
             }
             if (!Schema::hasColumn('colors', 'name')) {
-                $table->string('name')->nullable()->after('image');
+                $table->string('name')->nullable()->after('code');
             }
             if (!Schema::hasColumn('colors', 'status')) {
                 $table->boolean('status')->default(1)->after('name');

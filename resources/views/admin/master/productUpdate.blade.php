@@ -28,7 +28,7 @@ Update Product
                         @foreach ($product->productimages as $productimages)
                         <input type="hidden" name="imageIds[]" value="{{$productimages->id}}">
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-3 text-center">
-                            <!-- <img src="{{asset($productimages->image)}}" onerror="this.onerror=null;this.src='/media/imageNotAdded.jpg'" alt="" style="height: 100%; width: 100%; border-radius: 5px;"> -->
+                            <!-- <img src="{{asset($productimages->image)}}" onerror="this.onerror=null;this.src='/media/blank-image.svg'" alt="" style="height: 100%; width: 100%; border-radius: 5px;"> -->
                             <div class="image-input image-input-outline" id="image_input{{$productimages->id}}" style=" background-image: url('/media/blank-image.svg')">
                                 <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(/{{$productimages->image != null ? $productimages->image : '/media/blank-image.svg'}})"></div>
 

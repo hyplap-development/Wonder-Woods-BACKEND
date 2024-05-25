@@ -16,6 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('rooms')) {
             Schema::create('rooms', function (Blueprint $table) {
                 $table->id();
+                $table->string('image')->nullable();
                 $table->string('name')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
@@ -28,8 +29,11 @@ return new class extends Migration
             if (!Schema::hasColumn('rooms', 'name')) {
                 $table->string('name')->nullable()->after('id');
             }
+            if (!Schema::hasColumn('rooms', 'image')) {
+                $table->string('image')->nullable()->after('name');
+            }
             if (!Schema::hasColumn('rooms', 'status')) {
-                $table->boolean('status')->default(1)->after('name');
+                $table->boolean('status')->default(1)->after('image');
             }
             if (!Schema::hasColumn('rooms', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');

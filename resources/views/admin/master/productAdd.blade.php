@@ -40,6 +40,7 @@ Add Product
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-12 mt-3">
             <div class="card card-custom ">
@@ -88,7 +89,6 @@ Add Product
                                 <label style="font-weight: bold;">Select Sub Category <span style="color: red;">&#42</span></label>
                                 <select class="form-control selectpicker" id="subcategoryId" disabled name="subCategoryId" required>
                                     <option value="">Select Sub Category</option>
-
                                 </select>
                             </div>
                         </div>
@@ -103,10 +103,44 @@ Add Product
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-sm-3">
                             <div class="form-group">
+                                <label style="font-weight: bold;">Select Color <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="color" name="colorId" required>
+                                    @foreach($colors as $color)
+                                    <option value="{{$color->id}}">{{$color->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Select Size <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="size" name="sizeId" required>
+                                    @foreach($sizes as $size)
+                                    <option value="{{$size->id}}">{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Select Room <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="room" name="roomId" required>
+                                    @foreach($rooms as $room)
+                                    <option value="{{$room->id}}">{{$room->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="Name" name="name"  required>
+                                <input type="text" class="form-control" id="Name" name="name" required>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -129,8 +163,22 @@ Add Product
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label style="font-weight: bold;">GST (in %) <span style="color: red;">&#42</span></label>
-                                <input type="number" class="form-control" value="18" id="gst" name="gst" required>
+                                <label style="font-weight: bold;"> Select Gst <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="gst" name="gst" required>
+                                    @foreach($gsts as $gst)
+                                    <option value="{{$gst->percent}}">{{$gst->percent}} %</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Tag </label>
+                                <select class="form-control selectpicker" name="status" id="status">
+                                    <option value="New">New</option>
+                                    <option value="Discounted">Discounted</option>
+                                    <option value="Exclusive">Exclusive</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -153,39 +201,7 @@ Add Product
             </div>
         </div>
 
-        <div class="col-sm-6 mt-3">
-            <div class="card card-custom ">
-                <div class="card-header flex-wrap">
-                    <div class="card-title">
-                        <h3 class="card-label">Meta Details </h3>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Title </label>
-                                <input type="text" class="form-control" id="metaTitle" name="metaTitle">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Keywords</label>
-                                <input type="text" class="form-control" id="metaKeywords" name="metaKeywords">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Description</label>
-                                <textarea class="form-control" id="metaDescription" name="metaDescription"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 mt-3">
+        <div class="col-sm-8 mt-3">
             <div class="card card-custom ">
                 <div class="card-header flex-wrap">
                     <div class="card-title">
@@ -218,7 +234,98 @@ Add Product
                                 <input type="number" class="form-control" id="height" name="height">
                             </div>
                         </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Material <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" required name="material" id="material">
+                                    <option value="">Select Material</option>
+                                    <option value="Wood">Wood</option>
+                                    <option value="MDF">MDF</option>
+                                    <option value="HDF">HDF</option>
+                                    <option value="Marble">Metal</option>
+                                    <option value="Marble">Marble</option>
+                                    <option value="Plastic">Plastic</option>
+                                    <option value="Glass">Glass</option>
+                                    <option value="Fabric">Fabric</option>
+                                    <option value="Leather">Leather</option>
+                                    <option value="Stone">Stone</option>
+                                    <option value="Ceramic">Ceramic</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Finish -->
+                        <div class="col-sm-4">
+                            <div class="form-group mb-0">
+                                <label style="font-weight: bold;">Finish</label>
+                                <select class="form-control selectpicker" required name="finish" id="finish">
+                                    <option value="">Select Finish</option>
+                                    <option value="Glossy">Glossy</option>
+                                    <option value="Matte">Matte</option>
+                                    <option value="Semi-Glossy">Semi-Glossy</option>
+                                    <option value="Textured">Textured</option>
+                                    <option value="Polished">Polished</option>
+                                    <option value="Unpolished">Unpolished</option>
+                                    <option value="Natural">Natural</option>
+                                    <option value="Lacquered">Lacquered</option>
+                                    <option value="Painted">Painted</option>
+                                    <option value="Stained">Stained</option>
+                                    <option value="Distressed">Distressed</option>
+                                    <option value="Antique">Antique</option>
+                                    <option value="Rustic">Rustic</option>
+                                    <option value="Vintage">Vintage</option>
+                                    <option value="Modern">Modern</option>
+                                    <option value="Contemporary">Contemporary</option>
+                                    <option value="Traditional">Traditional</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Style -->
+                        <div class="col-sm-4">
+                            <div class="form-group mb-0">
+                                <label style="font-weight: bold;">Style</label>
+                                <select class="form-control selectpicker" required name="style" id="style">
+                                    <option value="">Select Style</option>
+                                    <option value="Modern">Modern</option>
+                                    <option value="Contemporary">Contemporary</option>
+                                    <option value="Traditional">Traditional</option>
+                                    <option value="Rustic">Rustic</option>
+                                    <option value="Vintage">Vintage</option>
+                                    <option value="Antique">Antique</option>
+                                    <option value="Industrial">Industrial</option>
+                                    <option value="Scandinavian">Scandinavian</option>
+                                    <option value="Bohemian">Bohemian</option>
+                                    <option value="Coastal">Coastal</option>
+                                    <option value="Mid-Century">Mid-Century</option>
+                                    <option value="Minimalist">Minimalist</option>
+                                    <option value="Shabby Chic">Shabby Chic</option>
+                                    <option value="Eclectic">Eclectic</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- weight -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Weight (in KG)</label>
+                                <input type="number" class="form-control" id="weight" name="weight">
+                            </div>
+                        </div>
+
+                        <!-- storage dropdonw between yes and no -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Storage</label>
+                                <select class="form-control selectpicker" required name="storage" id="storage">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label style="font-weight: bold;">Warranty <span style="color: red;">&#42</span></label>
                                 <select class="form-control selectpicker" id="warranty" name="warranty">
@@ -239,38 +346,6 @@ Add Product
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Material <span style="color: red;">&#42</span></label>
-                                <select class="form-control selectpicker" required name="material" id="material">
-                                    <option value="">Select Material</option>
-                                    <option value="Wood">Wood</option>
-                                    <option value="MDF">MDF</option>
-                                    <option value="HDF">HDF</option>
-                                    <option value="Marble">Metal</option>
-                                    <option value="Marble">Marble</option>
-                                    <option value="Plastic">Plastic</option>
-                                    <option value="Glass">Glass</option>
-                                    <option value="Fabric">Fabric</option>
-                                    <option value="Leather">Leather</option>
-                                    <option value="Stone">Stone</option>
-                                    <option value="Ceramic">Ceramic</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Available Colors (Seperate with comma) <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="colors" name="colors">
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Available Sizes (Seperate with comma eg. L x W x H ) <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="sizes" name="sizes">
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -287,53 +362,6 @@ Add Product
 @endsection
 
 @section('scripts')
-
-
-
-<!-- Check fields in create modal -->
-<script>
-    function checkName() {
-        var name = document.getElementById('name');
-        var nameTitle = document.getElementById('nameTitle');
-
-        if (name.value == "") {
-            nameTitle.innerHTML = "Name is required";
-            nameTitle.style.color = 'red';
-            name.style.border = '1px solid red';
-            $('#addBtn').attr('disabled', true)
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "{{url('admin/checkProdName')}}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                'name': name.value,
-            },
-            dataType: "json",
-            success: function(response) {
-                if (response.status == 200) {
-                    nameTitle.innerHTML = "Name is already in use";
-                    nameTitle.style.color = '#e0844b';
-                    name.style.border = '1px solid #e0844b';
-                    $('#addBtn').attr('disabled', true)
-
-                } else {
-                    nameTitle.innerHTML = "Name is available";
-                    nameTitle.style.color = 'green';
-                    name.style.border = '1px solid green';
-                    $('#addBtn').attr('disabled', false)
-                }
-            },
-            error: function(response) {
-                console.log(response);
-            }
-        });
-    }
-</script>
-
-
 <!-- image  -->
 <script>
     var KTImageInputDemo = function() {
@@ -401,7 +429,7 @@ Add Product
                 $('#subcategoryId').empty();
                 $('#subcategoryId').append($('<option>', {
                     value: '',
-                    text: 'Deselect'
+                    text: 'Select Sub Category'
                 }));
                 $.each(response, function(i, item) {
                     $('#subcategoryId').append($('<option>', {

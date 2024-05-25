@@ -36,12 +36,10 @@ Your Enquiries
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $i = 1;
-                    ?>
+                    
                     @foreach($enquiries as $data)
                     <tr>
-                        <td class="align-middle text-center">{{$i++}}</td>
+                        <td class="align-middle text-center">{{ $loop->iteration }}</td>
                         <td class="align-middle text-center">{{$data->name}}</td>
                         <td class="align-middle text-center">{{$data->email}}</td>
                         <td class="align-middle text-center">{{$data->phone}}</td>

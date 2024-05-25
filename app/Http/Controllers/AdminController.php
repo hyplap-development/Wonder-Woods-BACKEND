@@ -6,14 +6,18 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Company;
 use App\Models\Compare;
 use App\Models\Enquiries;
+use App\Models\Gst;
 use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Productimages;
 use App\Models\Role;
+use App\Models\Room;
+use App\Models\Size;
 use App\Models\Subcategory;
 use App\Models\Testimonial;
 use App\Models\Transaction;
@@ -223,14 +227,13 @@ class AdminController extends Controller
     }
 
     // Enduser controller
-
     public function indexEndUser()
     {
         $enduser = User::where('deleteId', 0)->whereIn('role', ['customer'])->with('rolee')->with('address')->get();
         return view('admin.master.enduser', compact('enduser'));
     }
 
-    // Companies
+    //************* Companies *************//
     public function indexCompany()
     {
         $companies = Company::where('deleteId', 0)->get();
@@ -241,6 +244,7 @@ class AdminController extends Controller
     {
         $model = new Company();
 
+        // add company image
         $uploadpath = 'media/images/company';
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -267,6 +271,7 @@ class AdminController extends Controller
     {
         $model = Company::find($request->hiddenId);
 
+        // update company Image
         $uploadpath = 'media/images/company';
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -276,11 +281,10 @@ class AdminController extends Controller
             chmod('media/images/company/' . $final_name, 0777);
             $image_path = "media/images/company/" . $final_name;
         } else {
-            $image_path = Company::find($request->hiddenId);
             if ($request->profile_avatar_remove == 1) {
                 $image_path = null;
             } else {
-                $image_path = $image_path['logo'];
+                $image_path = $model['logo'];
             }
         }
 
@@ -317,7 +321,191 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    // Categories 
+    //************* Color *************//
+    public function indexColor()
+    {
+        $colors = Color::where('deleteId', 0)->get();
+        return view('admin.master.color', compact('colors'));
+    }
+
+    public function addColor(Request $request)
+    {
+        $model = new Color();
+        $model->name = $request->name;
+        $model->code = $request->color;
+        $model->status = $request->status;
+        $model->deleteId = 0;
+        $model->save();
+        Session()->flash('alert-success', "Color Added Succesfully");
+        return redirect()->back();
+    }
+
+    public function updateColor(Request $request)
+    {
+        $model = Color::find($request->hiddenId);
+        $model->name = $request->name;
+        $model->code = $request->color;
+        $model->status = $request->status;
+        $model->update();
+        Session()->flash('alert-success', "Color Updated Succesfully");
+        return redirect()->back();
+    }
+
+    public function deleteColor(Request $request)
+    {
+        $model = Color::find($request->hiddenId);
+        $model->deleteId = 1;
+        $model->update();
+        Session()->flash('alert-success', "Color Deleted Succesfully");
+        return redirect()->back();
+    }
+
+    //************* Size *************//
+    public function indexSize()
+    {
+        $sizes = Size::where('deleteId', 0)->get();
+        return view('admin.master.size', compact('sizes'));
+    }
+
+    public function addSize(Request $request)
+    {
+        $model = new Size();
+        $model->name = $request->name;
+        $model->status = $request->status;
+        $model->deleteId = 0;
+        $model->save();
+        Session()->flash('alert-success', "Size Added Succesfully");
+        return redirect()->back();
+    }
+
+    public function updateSize(Request $request)
+    {
+        $model = Size::find($request->hiddenId);
+        $model->name = $request->name;
+        $model->status = $request->status;
+        $model->update();
+        Session()->flash('alert-success', "Size Updated Succesfully");
+        return redirect()->back();
+    }
+
+    public function deleteSize(Request $request)
+    {
+        $model = Size::find($request->hiddenId);
+        $model->deleteId = 1;
+        $model->update();
+        Session()->flash('alert-success', "Size Deleted Succesfully");
+        return redirect()->back();
+    }
+
+    //************* Gst *************//
+    public function indexGst()
+    {
+        $gsts = Gst::where('deleteId', 0)->get();
+        return view('admin.master.gst', compact('gsts'));
+    }
+
+    public function addGst(Request $request)
+    {
+        $model = new Gst();
+        $model->percent = $request->percent;
+        $model->status = $request->status;
+        $model->deleteId = 0;
+        $model->save();
+        Session()->flash('alert-success', "Gst Added Succesfully");
+        return redirect()->back();
+    }
+
+    public function updateGst(Request $request)
+    {
+        $model = Gst::find($request->hiddenId);
+        $model->percent = $request->percent;
+        $model->status = $request->status;
+        $model->update();
+        Session()->flash('alert-success', "Gst Updated Succesfully");
+        return redirect()->back();
+    }
+
+    public function deleteGst(Request $request)
+    {
+        $model = Gst::find($request->hiddenId);
+        $model->deleteId = 1;
+        $model->update();
+        Session()->flash('alert-success', "Gst Deleted Succesfully");
+        return redirect()->back();
+    }
+
+    //************* Room *************//
+    public function indexRoom()
+    {
+        $rooms = Room::where('deleteId', 0)->get();
+        return view('admin.master.room', compact('rooms'));
+    }
+
+    public function addRoom(Request $request)
+    {
+        $model = new Room();
+
+        // add room image
+        $uploadpath = 'media/images/room';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $final_name = time() . $image_name;
+            $image->move($uploadpath, $final_name);
+            chmod('media/images/room/' . $final_name, 0777);
+            $image_path = "media/images/room/" . $final_name;
+        } else {
+            $image_path = null;
+        }
+
+        $model->name = $request->name;
+        $model->image = $image_path;
+        $model->status = $request->status;
+        $model->deleteId = 0;
+        $model->save();
+        Session()->flash('alert-success', "Room Added Succesfully");
+        return redirect()->back();
+    }
+
+    public function updateRoom(Request $request)
+    {
+        $model = Room::find($request->hiddenId);
+
+        // update room image
+        $uploadpath = 'media/images/room';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $final_name = time() . $image_name;
+            $image->move($uploadpath, $final_name);
+            chmod('media/images/room/' . $final_name, 0777);
+            $image_path = "media/images/room/" . $final_name;
+        } else {
+            if ($request->profile_avatar_remove == 1) {
+                $image_path = null;
+            } else {
+                $image_path = $model['image'];
+            }
+        }
+
+        $model->name = $request->name;
+        $model->image = $image_path;
+        $model->status = $request->status;
+        $model->update();
+        Session()->flash('alert-success', "Room Updated Succesfully");
+        return redirect()->back();
+    }
+
+    public function deleteRoom(Request $request)
+    {
+        $model = Room::find($request->hiddenId);
+        $model->deleteId = 1;
+        $model->update();
+        Session()->flash('alert-success', "Room Deleted Succesfully");
+        return redirect()->back();
+    }
+
+    //************* Category *************// 
     public function indexCategory()
     {
         $categories = Category::where('deleteId', 0)->get();
@@ -344,10 +532,6 @@ class AdminController extends Controller
         $model->image = $image_path;
         $model->name = $request->name;
         $model->slug = Str::slug($request->name, '-');
-        $model->description = $request->description;
-        $model->metaKeywords = $request->metaKeywords;
-        $model->metaTitle = $request->metaTitle;
-        $model->metaDescription = $request->metaDescription;
         $model->status = $request->status;
         $model->deleteId = 0;
         $model->save();
@@ -379,10 +563,6 @@ class AdminController extends Controller
         $model->image = $image_path;
         $model->name = $request->name;
         $model->slug = Str::slug($request->name, '-');
-        $model->description = $request->description;
-        $model->metaKeywords = $request->metaKeywords;
-        $model->metaTitle = $request->metaTitle;
-        $model->metaDescription = $request->metaDescription;
         if ($model->status == 0) {
             Product::where('categoryId', $request->hiddenId)->update(['status' => 0]);
         }
@@ -423,19 +603,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function importCategory(Request $request)
-    {
-        try {
-            $this->importExcel($request, 0);
-
-            return redirect()->back();
-        } catch (\Exception $e) {
-            Session()->flash('alert-danger', 'error:' . $e);
-            return redirect()->back();
-        }
-    }
-
-    // Sub Categories
+    // ************* Sub Category *************//
     public function indexSubCategory()
     {
         $subcategories = Subcategory::where('deleteId', 0)->with('category')->get();
@@ -463,10 +631,6 @@ class AdminController extends Controller
         $model->categoryId = $request->categoryId;
         $model->name = $request->name;
         $model->slug = Str::slug($request->name, '-');
-        $model->description = $request->description;
-        $model->metaKeywords = $request->metaKeywords;
-        $model->metaTitle = $request->metaTitle;
-        $model->metaDescription = $request->metaDescription;
         $model->status = $request->status;
         $model->deleteId = 0;
         $model->save();
@@ -499,17 +663,13 @@ class AdminController extends Controller
         $model->categoryId = $request->categoryId;
         $model->name = $request->name;
         $model->slug = Str::slug($request->name, '-');
-        $model->description = $request->description;
-        $model->metaKeywords = $request->metaKeywords;
-        $model->metaTitle = $request->metaTitle;
-        $model->metaDescription = $request->metaDescription;
         if ($model->status == 0) {
             Product::where('categoryId', $request->hiddenId)->update(['status' => 0]);
         }
         $model->status = $request->status;
         $model->deleteId = 0;
         $model->update();
-        Session()->flash('alert-success', "Category Updated Succesfully");
+        Session()->flash('alert-success', "Sub Category Updated Succesfully");
         return redirect()->back();
     }
 
@@ -519,24 +679,11 @@ class AdminController extends Controller
         $model->deleteId = 1;
         Product::where('subCategoryId', $request->hiddenId)->update(['status' => 0]);
         $model->update();
-        Session()->flash('alert-success', "Subcategory Deleted Succesfully");
+        Session()->flash('alert-success', "Sub Category Deleted Succesfully");
         return redirect()->back();
     }
 
-    public function importSubCategory(Request $request)
-    {
-        try {
-            $this->importExcel($request, 1);
-
-            return redirect()->back();
-        } catch (\Exception $e) {
-            Session()->flash('alert-danger', 'error:' . $e);
-            return redirect()->back();
-        }
-    }
-
-
-    // Products 
+    // ************* Product *************//
     public function indexProduct()
     {
         $products = Product::where('deleteId', 0)->with('productimages')->with('company')->with('category')->with('subcategory')->get();
@@ -545,11 +692,15 @@ class AdminController extends Controller
 
     public function indexAddProduct()
     {
+        $companies = Company::where('deleteId', 0)->where('status', 1)->get();
         $categories = Category::where('deleteId', 0)->where('status', 1)->get();
         $subcategories = Subcategory::where('deleteId', 0)->where('status', 1)->get();
+        $colors = Color::where('deleteId', 0)->where('status', 1)->get();
+        $sizes = Size::where('deleteId', 0)->where('status', 1)->get();
+        $gsts = Gst::where('deleteId', 0)->where('status', 1)->get();
+        $rooms = Room::where('deleteId', 0)->where('status', 1)->get();
 
-        $companies = Company::where('deleteId', 0)->where('status', 1)->get();
-        return view('admin.master.productAdd', compact('categories', 'companies', 'subcategories'));
+        return view('admin.master.productAdd', compact('categories', 'companies', 'subcategories', 'colors', 'sizes', 'gsts', 'rooms'));
     }
 
     public function addProduct(Request $request)
