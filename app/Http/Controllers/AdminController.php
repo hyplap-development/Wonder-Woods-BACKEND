@@ -15,6 +15,7 @@ use App\Models\Log;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Productimages;
+use App\Models\Productrating;
 use App\Models\Role;
 use App\Models\Room;
 use App\Models\Size;
@@ -686,7 +687,28 @@ class AdminController extends Controller
     // ************* Product *************//
     public function indexProduct()
     {
-        $products = Product::where('deleteId', 0)->with('productimages')->with('company')->with('category')->with('subcategory')->get();
+        // add product rating 
+        $products = Product::where('deleteId', 0)->with('productimages', 'company', 'category', 'subcategory', 'color', 'size', 'room', 'gst')
+            ->withCount([
+                'ratings as oneStar' => function ($query) {
+                    $query->where('rating', 1);
+                },
+                'ratings as twoStar' => function ($query) {
+                    $query->where('rating', 2);
+                },
+                'ratings as threeStar' => function ($query) {
+                    $query->where('rating', 3);
+                },
+                'ratings as fourStar' => function ($query) {
+                    $query->where('rating', 4);
+                },
+                'ratings as fiveStar' => function ($query) {
+                    $query->where('rating', 5);
+                },
+                'ratings as totalRatings'
+            ])
+            ->get();
+
         return view('admin.master.product', compact('products'));
     }
 
@@ -723,30 +745,47 @@ class AdminController extends Controller
         $model->image = $image_path;
         $model->companyId = $request->companyId;
         $model->categoryId = $request->categoryId;
-        $model->subCategoryId = $request->subCategoryId;
+        $model->subcategoryId = $request->subCategoryId;
+        $model->colorId = $request->colorId;
+        $model->sizeId = $request->sizeId;
+        $model->roomId = $request->roomId;
         $model->name = $request->name;
         $model->slug = Str::slug($request->name, '-');
         $model->mrp = $request->mrp;
         $model->discountedPrice = $request->discountedPrice;
-        $model->gst = $request->gst;
         $model->deliveryCharge = $request->deliveryCharge;
+        $model->gst = $request->gst;
+        $model->tag = $request->tag;
         $model->description = $request->description;
 
         $model->length = $request->length;
         $model->width = $request->width;
         $model->height = $request->height;
-        $model->warranty = $request->warranty;
         $model->material = $request->material;
-        $model->colors = $request->colors;
-        $model->sizes = $request->sizes;
+        $model->finish = $request->finish;
+        $model->style = $request->style;
+        $model->weight = $request->weight;
+        $model->storage = $request->storage;
+        $model->warranty = $request->warranty;
 
-
-        $model->metaKeywords = $request->metaKeywords;
-        $model->metaTitle = $request->metaTitle;
-        $model->metaDescription = $request->metaDescription;
         $model->status = $request->status;
         $model->deleteId = 0;
         $model->save();
+
+        // 1 star 2 star 3 star 4 star 5 star
+
+        // save ratings if exists
+        for ($i = 1; $i <= 5; $i++) {
+            $rating = 'rating' . $i;
+            if ($request->$rating > 0) {
+                for ($j = 1; $j <= $request->$rating; $j++) {
+                    $model2 = new Productrating();
+                    $model2->productId = $model->id;
+                    $model2->rating = $i;
+                    $model2->save();
+                }
+            }
+        }
 
         // save multiple images if exists
         if ($request->hasFile('multiImages')) {
@@ -771,11 +810,35 @@ class AdminController extends Controller
 
     public function indexUpdateProduct($slug)
     {
+        $product = Product::where('slug', $slug)
+            ->withCount([
+                'ratings as oneStar' => function ($query) {
+                    $query->where('rating', 1);
+                },
+                'ratings as twoStar' => function ($query) {
+                    $query->where('rating', 2);
+                },
+                'ratings as threeStar' => function ($query) {
+                    $query->where('rating', 3);
+                },
+                'ratings as fourStar' => function ($query) {
+                    $query->where('rating', 4);
+                },
+                'ratings as fiveStar' => function ($query) {
+                    $query->where('rating', 5);
+                },
+                'ratings as totalRatings'
+            ])
+            ->first();
+        $companies = Company::where('deleteId', 0)->where('status', 1)->get();
         $categories = Category::where('deleteId', 0)->where('status', 1)->get();
         $subcategories = Subcategory::where('deleteId', 0)->where('status', 1)->get();
-        $companies = Company::where('deleteId', 0)->where('status', 1)->get();
-        $product = Product::where('deleteId', 0)->where('slug', $slug)->with('productimages')->first();
-        return view('admin.master.productUpdate', compact('categories', 'product', 'companies', 'subcategories'));
+        $colors = Color::where('deleteId', 0)->where('status', 1)->get();
+        $sizes = Size::where('deleteId', 0)->where('status', 1)->get();
+        $gsts = Gst::where('deleteId', 0)->where('status', 1)->get();
+        $rooms = Room::where('deleteId', 0)->where('status', 1)->get();
+
+        return view('admin.master.productUpdate', compact('categories', 'product', 'companies', 'subcategories', 'colors', 'sizes', 'gsts', 'rooms'));
     }
 
     public function saveImages(Request $request)

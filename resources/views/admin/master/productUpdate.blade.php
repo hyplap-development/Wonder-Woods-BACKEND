@@ -30,7 +30,7 @@ Update Product
                         <div class="col-sm-12 col-md-6 col-lg-3 mt-3 text-center">
                             <!-- <img src="{{asset($productimages->image)}}" onerror="this.onerror=null;this.src='/media/blank-image.svg'" alt="" style="height: 100%; width: 100%; border-radius: 5px;"> -->
                             <div class="image-input image-input-outline" id="image_input{{$productimages->id}}" style=" background-image: url('/media/blank-image.svg')">
-                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(/{{$productimages->image != null ? $productimages->image : '/media/blank-image.svg'}})"></div>
+                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url('/{{$productimages->image != null ? $productimages->image : '/media/blank-image.svg'}}')"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
@@ -106,7 +106,7 @@ Update Product
                     <div class="row">
                         <div class="col-sm-12 text-center mb-5">
                             <div class="image-input image-input-outline" id="image_input" style=" background-image: url('/media/blank-image.svg')">
-                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url(/{{$product->image != null ? $product->image : '/media/blank-image.svg'}})"></div>
+                                <div class="image-input-wrapper" style="width: 150px; height: 150px; background-image: url('/{{$product->image != null ? $product->image : '/media/blank-image.svg'}}')"></div>
 
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>
@@ -156,8 +156,38 @@ Update Product
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
+                                <label style="font-weight: bold;">Select Color <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="colorId" name="colorId" required>
+                                    @foreach($colors as $color)
+                                    <option value="{{$color->id}}" {{$product->colorId == $color->id ? 'selected' : ''}}>{{$color->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Select Size <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="sizeId" name="sizeId" required>
+                                    @foreach($sizes as $size)
+                                    <option value="{{$size->id}}" {{$product->sizeId == $size->id ? 'selected' : ''}}>{{$size->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Select Room <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="roomId" name="roomId" required>
+                                    @foreach($rooms as $room)
+                                    <option value="{{$room->id}}" {{$product->roomId == $room->id ? 'selected' : ''}}>{{$room->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label style="font-weight: bold;">Name <span style="color: red;">&#42</span></label>
-                                <input type="text" class="form-control" id="Name" name="name" minlength="3"  value="{{$product->name}}" required>
+                                <input type="text" class="form-control" id="Name" name="name" minlength="3" value="{{$product->name}}" required>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -181,7 +211,21 @@ Update Product
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label style="font-weight: bold;">GST (in %) <span style="color: red;">&#42</span></label>
-                                <input type="number" class="form-control" value="18" id="gst" name="gst" value="{{$product->gst}}" required>
+                                <select class="form-control selectpicker" name="gst" id="gst" required>
+                                    @foreach($gsts as $gst)
+                                    <option value="{{$gst->percent}}" {{$product->percent == $gst->percent ? 'selected' : ''}}>{{$gst->percent}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Tag </label>
+                                <select class="form-control selectpicker" name="tag" id="tag">
+                                    <option value="New" {{$product->tag == 'New' ? 'selected' : ''}}>New</option>
+                                    <option value="Discounted" {{$product->tag == 'Discounted' ? 'selected' : ''}}>Discounted</option>
+                                    <option value="Exclusive" {{$product->tag == 'Exclusive' ? 'selected' : ''}}>Exclusive</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -204,39 +248,7 @@ Update Product
             </div>
         </div>
 
-        <div class="col-sm-6 mt-3">
-            <div class="card card-custom ">
-                <div class="card-header flex-wrap">
-                    <div class="card-title">
-                        <h3 class="card-label">Meta Details </h3>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Title </label>
-                                <input type="text" class="form-control" id="metaTitle" name="metaTitle" value="{{$product->metaTitle}}">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Keywords</label>
-                                <input type="text" class="form-control" id="metaKeywords" name="metaKeywords" value="{{$product->metaKeywords}}">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Meta Description</label>
-                                <textarea class="form-control" id="metaDescription" name="metaDescription">{{$product->metaDescription}}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6 mt-3">
+        <div class="col-sm-8 mt-3">
             <div class="card card-custom ">
                 <div class="card-header flex-wrap">
                     <div class="card-title">
@@ -269,57 +281,174 @@ Update Product
                                 <input type="number" class="form-control" id="height" name="height" value="{{$product->height}}">
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Warranty <span style="color: red;">&#42</span></label>
-                                <select class="form-control selectpicker" id="warranty" name="warranty">
-                                    <option value="0" {{$product->warranty == 0 ? 'selected' : ''}}>No Warranty</option>
-                                    <option value="3" {{$product->warranty == 3 ? 'selected' : ''}}>3 Months</option>
-                                    <option value="6" {{$product->warranty == 6 ? 'selected' : ''}}>6 Months</option>
-                                    <option value="9" {{$product->warranty == 9 ? 'selected' : ''}}>9 Months</option>
-                                    <option value="12" {{$product->warranty == 12 ? 'selected' : ''}}>1 Year</option>
-                                    <option value="24" {{$product->warranty == 24 ? 'selected' : ''}}>2 Years</option>
-                                    <option value="36" {{$product->warranty == 36 ? 'selected' : ''}}>3 Years</option>
-                                    <option value="48" {{$product->warranty == 48 ? 'selected' : ''}}>4 Years</option>
-                                    <option value="60" {{$product->warranty == 60 ? 'selected' : ''}}>5 Years</option>
-                                    <option value="72" {{$product->warranty == 72 ? 'selected' : ''}}>6 Years</option>
-                                    <option value="84" {{$product->warranty == 84 ? 'selected' : ''}}>7 Years</option>
-                                    <option value="96" {{$product->warranty == 96 ? 'selected' : ''}}>8 Years</option>
-                                    <option value="108" {{$product->warranty == 108 ? 'selected' : ''}}>9 Years</option>
-                                    <option value="120" {{$product->warranty == 120 ? 'selected' : ''}}>10 Years</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
+
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label style="font-weight: bold;">Material <span style="color: red;">&#42</span></label>
                                 <select class="form-control selectpicker" required name="material" id="material">
                                     <option value="">Select Material</option>
-                                    <option value="Wood" {{$product->material == 'Wood' ? 'selected' : ''}}>Wood</option>
-                                    <option value="MDF" {{$product->material == 'MDF' ? 'selected' : ''}}>MDF</option>
-                                    <option value="HDF" {{$product->material == 'HDF' ? 'selected' : ''}}>HDF</option>
-                                    <option value="Metal" {{$product->material == 'Metal' ? 'selected' : ''}}>Metal</option>
-                                    <option value="Marble" {{$product->material == 'Marble' ? 'selected' : ''}}>Marble</option>
-                                    <option value="Plastic" {{$product->material == 'Plastic' ? 'selected' : ''}}>Plastic</option>
-                                    <option value="Glass" {{$product->material == 'Glass' ? 'selected' : ''}}>Glass</option>
-                                    <option value="Fabric" {{$product->material == 'Fabric' ? 'selected' : ''}}>Fabric</option>
-                                    <option value="Leather" {{$product->material == 'Leather' ? 'selected' : ''}}>Leather</option>
-                                    <option value="Stone" {{$product->material == 'Stone' ? 'selected' : ''}}>Stone</option>
-                                    <option value="Ceramic" {{$product->material == 'Ceramic' ? 'selected' : ''}}>Ceramic</option>
+                                    <option value="Wood" {{ $product->material === 'Wood' ? 'selected' : '' }}>Wood</option>
+                                    <option value="MDF" {{ $product->material === 'MDF' ? 'selected' : '' }}>MDF</option>
+                                    <option value="HDF" {{ $product->material === 'HDF' ? 'selected' : '' }}>HDF</option>
+                                    <option value="Marble" {{ $product->material === 'Marble' ? 'selected' : '' }}>Metal</option>
+                                    <option value="Marble" {{ $product->material === 'Marble' ? 'selected' : '' }}>Marble</option>
+                                    <option value="Plastic" {{ $product->material === 'Plastic' ? 'selected' : '' }}>Plastic</option>
+                                    <option value="Glass" {{ $product->material === 'Glass' ? 'selected' : '' }}>Glass</option>
+                                    <option value="Fabric" {{ $product->material === 'Fabric' ? 'selected' : '' }}>Fabric</option>
+                                    <option value="Leather" {{ $product->material === 'Leather' ? 'selected' : '' }}>Leather</option>
+                                    <option value="Stone" {{ $product->material === 'Stone' ? 'selected' : '' }}>Stone</option>
+                                    <option value="Ceramic" {{ $product->material === 'Ceramic' ? 'selected' : '' }}>Ceramic</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Available Colors (Seperate with comma) </label>
-                                <input type="text" class="form-control" value="{{$product->colors}}" id="colors" name="colors">
+
+                        <!-- Finish -->
+                        <div class="col-sm-4">
+                            <div class="form-group mb-0">
+                                <label style="font-weight: bold;">Finish</label>
+                                <select class="form-control selectpicker" required name="finish" id="finish">
+                                    <option value="">Select Finish</option>
+                                    <option value="Glossy" {{ $product->finish == "Glossy" ? 'selected' : '' }}>Glossy</option>
+                                    <option value="Matte" {{ $product->finish == "Matte" ? 'selected' : '' }}>Matte</option>
+                                    <option value="Semi-Glossy" {{ $product->finish == "Semi-Glossy" ? 'selected' : '' }}>Semi-Glossy</option>
+                                    <option value="Textured" {{ $product->finish == "Textured" ? 'selected' : '' }}>Textured</option>
+                                    <option value="Polished" {{ $product->finish == "Polished" ? 'selected' : '' }}>Polished</option>
+                                    <option value="Unpolished" {{ $product->finish == "Unpolished" ? 'selected' : '' }}>Unpolished</option>
+                                    <option value="Natural" {{ $product->finish == "Natural" ? 'selected' : '' }}>Natural</option>
+                                    <option value="Lacquered" {{ $product->finish == "Lacquered" ? 'selected' : '' }}>Lacquered</option>
+                                    <option value="Painted" {{ $product->finish == "Painted" ? 'selected' : '' }}>Painted</option>
+                                    <option value="Stained" {{ $product->finish == "Stained" ? 'selected' : '' }}>Stained</option>
+                                    <option value="Distressed" {{ $product->finish == "Distressed" ? 'selected' : '' }}>Distressed</option>
+                                    <option value="Antique" {{ $product->finish == "Antique" ? 'selected' : '' }}>Antique</option>
+                                    <option value="Rustic" {{ $product->finish == "Rustic" ? 'selected' : '' }}>Rustic</option>
+                                    <option value="Vintage" {{ $product->finish == "Vintage" ? 'selected' : '' }}>Vintage</option>
+                                    <option value="Modern" {{ $product->finish == "Modern" ? 'selected' : '' }}>Modern</option>
+                                    <option value="Contemporary" {{ $product->finish == "Contemporary" ? 'selected' : '' }}>Contemporary</option>
+                                    <option value="Traditional" {{ $product->finish == "Traditional" ? 'selected' : '' }}>Traditional</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Available Sizes (Seperate with comma eg. L x W x H ) </label>
-                                <input type="text" class="form-control" value="{{$product->sizes}}" id="sizes" name="sizes">
+
+                        <!-- Style -->
+                        <div class="col-sm-4">
+                            <div class="form-group mb-0">
+                                <label style="font-weight: bold;">Style</label>
+                                <select class="form-control selectpicker" required name="style" id="style">
+                                    <option value="">Select Style</option>
+                                    <option value="Modern" {{ $product->style == 'Modern' ? 'selected' : '' }}>Modern</option>
+                                    <option value="Contemporary" {{ $product->style == 'Contemporary' ? 'selected' : '' }}>Contemporary</option>
+                                    <option value="Traditional" {{ $product->style == 'Traditional' ? 'selected' : '' }}>Traditional</option>
+                                    <option value="Rustic" {{ $product->style == 'Rustic' ? 'selected' : '' }}>Rustic</option>
+                                    <option value="Vintage" {{ $product->style == 'Vintage' ? 'selected' : '' }}>Vintage</option>
+                                    <option value="Antique" {{ $product->style == 'Antique' ? 'selected' : '' }}>Antique</option>
+                                    <option value="Industrial" {{ $product->style == 'Industrial' ? 'selected' : '' }}>Industrial</option>
+                                    <option value="Scandinavian" {{ $product->style == 'Scandinavian' ? 'selected' : '' }}>Scandinavian</option>
+                                    <option value="Bohemian" {{ $product->style == 'Bohemian' ? 'selected' : '' }}>Bohemian</option>
+                                    <option value="Coastal" {{ $product->style == 'Coastal' ? 'selected' : '' }}>Coastal</option>
+                                    <option value="Mid-Century" {{ $product->style == 'Mid-Century' ? 'selected' : '' }}>Mid-Century</option>
+                                    <option value="Minimalist" {{ $product->style == 'Minimalist' ? 'selected' : '' }}>Minimalist</option>
+                                    <option value="Shabby Chic" {{ $product->style == 'Shabby Chic' ? 'selected' : '' }}>Shabby Chic</option>
+                                    <option value="Eclectic" {{ $product->style == 'Eclectic' ? 'selected' : '' }}>Eclectic</option>
+                                </select>
                             </div>
+                        </div>
+
+                        <!-- weight -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Weight (in KG)</label>
+                                <input type="number" class="form-control" id="weight" name="weight" value="{{$product->weight}}">
+                            </div>
+                        </div>
+
+                        <!-- storage dropdonw between yes and no -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Storage</label>
+                                <select class="form-control selectpicker" required name="storage" id="storage">
+                                    <option value="0" {{$product->storage == 0 ? 'selected' : ''}}>No</option>
+                                    <option value="1" {{$product->storage == 1 ? 'selected' : ''}}>Yes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Warranty <span style="color: red;">&#42</span></label>
+                                <select class="form-control selectpicker" id="warranty" name="warranty">
+                                    <option value="0" {{ $product->warrenty == '0' ? 'selected' : '' }}>No Warranty</option>
+                                    <option value="3" {{ $product->warrenty == '3' ? 'selected' : '' }}>3 Months</option>
+                                    <option value="6" {{ $product->warrenty == '6' ? 'selected' : '' }}>6 Months</option>
+                                    <option value="9" {{ $product->warrenty == '9' ? 'selected' : '' }}>9 Months</option>
+                                    <option value="12" {{ $product->warrenty == '12' ? 'selected' : '' }}>1 Year</option>
+                                    <option value="24" {{ $product->warrenty == '24' ? 'selected' : '' }}>2 Years</option>
+                                    <option value="36" {{ $product->warrenty == '36' ? 'selected' : '' }}>3 Years</option>
+                                    <option value="48" {{ $product->warrenty == '48' ? 'selected' : '' }}>4 Years</option>
+                                    <option value="60" {{ $product->warrenty == '60' ? 'selected' : '' }}>5 Years</option>
+                                    <option value="72" {{ $product->warrenty == '72' ? 'selected' : '' }}>6 Years</option>
+                                    <option value="84" {{ $product->warrenty == '84' ? 'selected' : '' }}>7 Years</option>
+                                    <option value="96" {{ $product->warrenty == '96' ? 'selected' : '' }}>8 Years</option>
+                                    <option value="108" {{ $product->warrenty == '108' ? 'selected' : '' }}>9 Years</option>
+                                    <option value="120" {{ $product->warrenty == '120' ? 'selected' : '' }}>10 Years</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 mt-3">
+            <div class="card card-custom ">
+                <div class="card-header flex-wrap">
+                    <div class="card-title">
+                        <h3 class="card-label">Ratings</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">1 Star</label>
+                                <input type="number" class="form-control" id="rating1" name="rating1" onkeyup="ratingChanged(1)" min="0" required value="{{$product->oneStar}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">2 Star</label>
+                                <input type="number" class="form-control" id="rating2" name="rating2" onkeyup="ratingChanged(2)" min="0" required value="{{$product->twoStar}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">3 Star</label>
+                                <input type="number" class="form-control" id="rating3" name="rating3" onkeyup="ratingChanged(3)" min="0" required value="{{$product->threeStar}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">4 Star</label>
+                                <input type="number" class="form-control" id="rating4" name="rating4" onkeyup="ratingChanged(4)" min="0" required value="{{$product->fourStar}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">5 Star</label>
+                                <input type="number" class="form-control" id="rating5" name="rating5" onkeyup="ratingChanged(5)" min="0" required value="{{$product->fiveStar}}">
+                            </div>
+                        </div>
+                        <?php
+                        $totalRatings = $product->oneStar + $product->twoStar + $product->threeStar + $product->fourStar + $product->fiveStar;
+                        if ($totalRatings > 0) {
+                            $weightedSum = ($product->oneStar * 1) + ($product->twoStar * 2) + ($product->threeStar * 3) + ($product->fourStar * 4) + ($product->fiveStar * 5);
+                            $averageRating = $weightedSum / $totalRatings;
+                            $averageRating = number_format((float)$averageRating, 1, '.', '');
+                        } else {
+                            $averageRating = 'No ratings yet';
+                        }
+                        ?>
+                        <div class="col-sm-12">
+                            <p> Average Rating: <strong id="averageRating"> {{$averageRating}} </strong></p>
                         </div>
                     </div>
                 </div>
@@ -393,8 +522,8 @@ Update Product
 
         // add new block
         var newBlock = '<div class="col-sm-12 col-md-6 col-lg-3 mt-3 text-center">\
-        <div class="image-input image-input-outline" id="image_input2' + counter + '" style=" background-image: url('/media/blank-image.svg')">\
-                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url('/media/blank-image.svg')"></div>\
+        <div class="image-input image-input-outline" id="image_input2' + counter + '" style=" background-image: url(' / media / blank - image.svg ')">\
+                                <div class="image-input-wrapper" style="width: 200px; height: 200px; background-image: url(' / media / blank - image.svg ')"></div>\
                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change Image">\
                                     <i class="fas fa-plus icon-sm text-muted" style="color: black;"></i>\
                                     <input type="file" name="image[]" accept=".png, .jpg, .jpeg, .webp" />\

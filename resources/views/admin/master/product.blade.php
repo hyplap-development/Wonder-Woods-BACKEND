@@ -43,17 +43,19 @@ All Products
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-hover table-responsive-lg" id="tabdata" style="margin-top: 13px !important">
+            <table class="table table-bordered table-hover table-responsive-xl" id="tabdata" style="margin-top: 13px !important">
                 <thead>
                     <tr>
                         <th class="align-middle text-center">Sr.no</th>
                         <th class="align-middle text-center">Product</th>
                         <th class="align-middle text-center">Company</th>
                         <th class="align-middle text-center">Price</th>
+                        <th class="align-middle text-center">Room</th>
                         <th class="align-middle text-center">Size</th>
                         <th class="align-middle text-center">Color</th>
                         <th class="align-middle text-center">Delivery</th>
                         <th class="align-middle text-center">Other Details</th>
+                        <th class="align-middle text-center">Ratings</th>
                         <th class="align-middle text-center">Status</th>
                         <th class="align-middle text-center">Actions</th>
                     </tr>
@@ -63,24 +65,28 @@ All Products
                     @foreach($products as $data)
                     <tr>
                         <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                        <td class="align-middle text-center">
+                        <td class="align-middle" style="min-width: 250px;">
                             <div class="d-flex">
                                 <a href="" data-toggle="modal" data-target="#imageModal{{$data->id}}">
                                     <img src="{{asset($data->image)}}" onerror="this.onerror=null;this.src='/media/blank-image.svg'" style="border-radius: 5px;" alt="" width="50px" height="50px">
                                 </a>
                                 <div class="ml-3">
                                     <h5>{{$data->name}}</h5>
-                                    <p>{{$data->categoryId}} | {{$data->subCategoryId}}</p>
+                                    <p>{{isset($data->category) ? $data->category->name : 'Category Not Found'}} | {{isset($data->subcategory) ? $data->subcategory->name : 'Sub Category Not Found'}}</p>
                                 </div>
                             </div>
                         </td>
                         <td class="align-middle text-center">{{ isset($data->company) ? $data->company->name : 'Company Not Found'}}</td>
-                        <td class="align-middle text-center">{{$data->discountedPrice}}</td>
+                        <td class="align-middle text-center">₹{{$data->discountedPrice}}</td>
+                        <td class="align-middle text-center">{{ isset($data->room) ? $data->room->name : 'Room Not Found'}}</td>
                         <td class="align-middle text-center">{{ isset($data->size) ? $data->size->name : 'Size Not Found'}}</td>
                         <td class="align-middle text-center">{{ isset($data->color) ? $data->color->name : 'Color Not Found'}}</td>
-                        <td class="align-middle text-center">{{$data->deliveryCharge}}</td>
+                        <td class="align-middle text-center">₹{{$data->deliveryCharge}}</td>
                         <td class="align-middle text-center">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal{{$data->id}}">View</button>
+                        </td>
+                        <td class="align-middle text-center">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal{{$data->id}}">View</button>
                         </td>
                         <td class="align-middle text-center">
                             @if($data->status == 1)
@@ -124,12 +130,13 @@ All Products
                         </div>
                     </div>
                     <!-- end image modal -->
-                    <!-- meta modal -->
-                    <div class="modal fade" id="metaModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+
+                    <!-- other detail modal -->
+                    <div class="modal fade" id="detailModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Meta Details</h5>
+                                    <h5 class="modal-title">Other Details</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <lord-icon src="https://cdn.lordicon.com/vfzqittk.json" trigger="hover" state="hover-2" colors="primary:#000000" style="width:35px;height:35px">
                                         </lord-icon>
@@ -139,20 +146,68 @@ All Products
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label style="font-weight: bold;">Meta Title </label> <br>
-                                                <label></label>
+                                                <label style="font-weight: bold;"> Description </label> <br>
+                                                <label> {{$data->description}} </label>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label style="font-weight: bold;">Meta Keywords </label> <br>
-                                                <label></label>
+                                                <label style="font-weight: bold;"> GST </label> <br>
+                                                <label> {{$data->gst}}% </label>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label style="font-weight: bold;">Meta Description </label> <br>
-                                                <label></label>
+                                                <label style="font-weight: bold;">Material </label> <br>
+                                                <label> {{$data->material}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Finish </label> <br>
+                                                <label> {{$data->finish}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Style </label> <br>
+                                                <label> {{$data->style}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Weight </label> <br>
+                                                <label> {{$data->weight}} Kg </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Warranty </label> <br>
+                                                <label> {{$data->warranty}} Months </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Storage </label> <br>
+                                                <label> {{$data->storage === 1 ? 'Yes' : 'No'}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> Length </label> <br>
+                                                <label> {{$data->length}} inches </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Width </label> <br>
+                                                <label> {{$data->width}} inches </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Height </label> <br>
+                                                <label> {{$data->height}} inches </label>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +215,73 @@ All Products
                             </div>
                         </div>
                     </div>
-                    <!-- end meta modal -->
+                    <!-- end other detail modal -->
+
+                    <!-- rating modal -->
+                    <div class="modal fade" id="ratingModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Ratings</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <lord-icon src="https://cdn.lordicon.com/vfzqittk.json" trigger="hover" state="hover-2" colors="primary:#000000" style="width:35px;height:35px">
+                                        </lord-icon>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> 1 Star </label> <br>
+                                                <label> {{$data->oneStar}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> 2 Star </label> <br>
+                                                <label> {{$data->twoStar}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> 3 Star </label> <br>
+                                                <label> {{$data->threeStar}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> 4 Star </label> <br>
+                                                <label> {{$data->fourStar}} </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;"> 5 Star </label> <br>
+                                                <label> {{$data->fiveStar}} </label>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        $totalRatings = $data->oneStar + $data->twoStar + $data->threeStar + $data->fourStar + $data->fiveStar;
+                                        if ($totalRatings > 0) {
+                                            $weightedSum = ($data->oneStar * 1) + ($data->twoStar * 2) + ($data->threeStar * 3) + ($data->fourStar * 4) + ($data->fiveStar * 5);
+                                            $averageRating = $weightedSum / $totalRatings;
+                                        } else {
+                                            $averageRating = 'No ratings yet';
+                                        }
+                                        ?>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label style="font-weight: bold;">Average Rating</label><br>
+                                                <label>{{ is_numeric($averageRating) ? number_format($averageRating, 1) : $averageRating }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- delete modal -->
                     <div class="modal fade" id="deleteModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">

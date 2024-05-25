@@ -174,7 +174,7 @@ Add Product
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label style="font-weight: bold;">Tag </label>
-                                <select class="form-control selectpicker" name="status" id="status">
+                                <select class="form-control selectpicker" name="tag" id="tag">
                                     <option value="New">New</option>
                                     <option value="Discounted">Discounted</option>
                                     <option value="Exclusive">Exclusive</option>
@@ -351,6 +351,52 @@ Add Product
             </div>
         </div>
 
+        <div class="col-sm-4 mt-3">
+            <div class="card card-custom ">
+                <div class="card-header flex-wrap">
+                    <div class="card-title">
+                        <h3 class="card-label">Ratings</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">1 Star</label>
+                                <input type="number" class="form-control" id="rating1" name="rating1" onkeyup="ratingChanged(1)" value="0" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">2 Star</label>
+                                <input type="number" class="form-control" id="rating2" name="rating2" onkeyup="ratingChanged(2)" value="0" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">3 Star</label>
+                                <input type="number" class="form-control" id="rating3" name="rating3" onkeyup="ratingChanged(3)" value="0" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">4 Star</label>
+                                <input type="number" class="form-control" id="rating4" name="rating4" onkeyup="ratingChanged(4)" value="0" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">5 Star</label>
+                                <input type="number" class="form-control" id="rating5" name="rating5" onkeyup="ratingChanged(5)" value="0" min="0" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <p> Average Rating: <strong id="averageRating">0</strong> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col-lg-12">
             <div class=" modal-footer">
@@ -443,6 +489,35 @@ Add Product
                 console.log(response);
             }
         });
+    }
+</script>
+
+<script>
+    function ratingChanged(rating) {
+        // Get the count of each rating
+        var rating1 = parseInt($('#rating1').val());
+        var rating2 = parseInt($('#rating2').val());
+        var rating3 = parseInt($('#rating3').val());
+        var rating4 = parseInt($('#rating4').val());
+        var rating5 = parseInt($('#rating5').val());
+
+        // Calculate the total number of ratings
+        var totalRatings = rating1 + rating2 + rating3 + rating4 + rating5;
+
+        // Check if totalRatings is not zero to avoid division by zero
+        if (totalRatings === 0) {
+            $('#averageRating').text('No ratings yet');
+            return;
+        }
+
+        // Calculate the weighted sum of ratings
+        var weightedSum = (rating1 * 1) + (rating2 * 2) + (rating3 * 3) + (rating4 * 4) + (rating5 * 5);
+
+        // Calculate the average rating
+        var average = weightedSum / totalRatings;
+
+        // Display the average rating, rounded to one decimal place
+        $('#averageRating').text(average.toFixed(1));
     }
 </script>
 

@@ -43,7 +43,7 @@ class Product extends Model
 
     public function subcategory()
     {
-        return $this->belongsTo(Subcategory::class, 'subCategoryId', 'id');
+        return $this->belongsTo(Subcategory::class, 'subcategoryId', 'id');
     }
 
     public function company()
@@ -55,4 +55,31 @@ class Product extends Model
     {
         return $this->hasMany(Productimages::class, 'productId', 'id');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Productrating::class, 'productId', 'id');
+    }
+
+    public function size()
+    {
+        return $this->hasOne(Size::class, 'id', 'sizeId');
+    }
+
+    public function color()
+    {
+        return $this->hasOne(Color::class, 'id', 'colorId');
+    }
+
+    public function room()
+    {
+        return $this->hasOne(Room::class, 'id', 'roomId');
+    }
+
+    public function gst()
+    {
+        return $this->hasOne(Gst::class, 'id', 'gstId');
+    }
+
+
 }

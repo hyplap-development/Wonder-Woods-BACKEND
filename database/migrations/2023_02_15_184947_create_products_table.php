@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->integer('companyId')->nullable();
                 $table->integer('sizeId')->nullable();
                 $table->integer('colorId')->nullable();
+                $table->integer('roomId')->nullable();
                 $table->string('tag')->nullable();
                 $table->string('name')->nullable();
                 $table->string('slug')->nullable();
@@ -62,8 +63,11 @@ return new class extends Migration
             if (!Schema::hasColumn('products', 'colorId')) {
                 $table->integer('colorId')->nullable()->after('sizeId');
             }
+            if (!Schema::hasColumn('products', 'roomId')) {
+                $table->integer('roomId')->nullable()->after('colorId');
+            }
             if (!Schema::hasColumn('products', 'tag')) {
-                $table->string('tag')->nullable()->after('colorId');
+                $table->string('tag')->nullable()->after('roomId');
             }
             if (!Schema::hasColumn('products', 'name')) {
                 $table->string('name')->nullable()->after('tag');
