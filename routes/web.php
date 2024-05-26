@@ -100,8 +100,6 @@ Route::prefix('admin')->group(function () {
             Route::post('delete', [AdminController::class, 'deleteRoom']);
         });
 
-
-
         //Category
         Route::group([
             'prefix' => 'category'
@@ -130,6 +128,7 @@ Route::prefix('admin')->group(function () {
             Route::get('add', [AdminController::class, 'indexAddProduct']);
             Route::post('add', [AdminController::class, 'addProduct']);
             Route::post('addImages', [AdminController::class, 'addImages']);
+            Route::post('inventory', [AdminController::class, 'updateInventory']);
             Route::get('update/{slug}', [AdminController::class, 'indexUpdateProduct']);
             Route::post('saveImages', [AdminController::class, 'saveImages']);
             Route::post('update', [AdminController::class, 'updateProduct']);

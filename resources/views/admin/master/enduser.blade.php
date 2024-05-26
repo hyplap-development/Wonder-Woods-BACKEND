@@ -140,7 +140,7 @@ End Users
     <div class="card card-custom ">
         <div class="card-header flex-wrap">
             <div class="card-title">
-                <h3 class="card-label">End Users </h3>
+                <h3 class="card-label"> Customers </h3>
             </div>
         </div>
         <div class="card-body">
@@ -148,22 +148,44 @@ End Users
                 <thead>
                     <tr>
                         <th class="align-middle text-center">Sr.no</th>
-                        <th class="align-middle text-center">Name</th>
-                        <th class="align-middle text-center">Email</th>
-                        <th class="align-middle text-center">Phone Number</th>
+                        <th class="align-middle text-center">Customer</th>
+                        <th class="align-middle text-center"> Last Order</th>
+                        <th class="align-middle text-center">Lifetime Spent</th>
+                        <th class="align-middle text-center"> Cart</th>
+                        <th class="align-middle text-center"> Wishlist</th>
                         <th class="align-middle text-center">Addresses</th>
                         <th class="align-middle text-center">Status</th>
                         <th class="align-middle text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     @foreach($enduser as $data)
                     <tr>
                         <td class="align-middle text-center">{{ $loop->iteration }}</td>
-                        <td class="align-middle text-center">{{$data->name}}</td>
-                        <td class="align-middle text-center">{{$data->email}}</td>
-                        <td class="align-middle text-center">{{$data->phone}}</td>
+                        <td class="align-middle" style="min-width: 250px;">
+                            <div class="d-flex">
+                                <a href="" data-toggle="modal" data-target="#imageModal{{$data->id}}">
+                                    <img src="{{asset($data->image)}}" onerror="this.onerror=null;this.src='/media/blank-image.svg'" style="border-radius: 5px;" alt="" width="50px" height="50px">
+                                </a>
+                                <div class="ml-3">
+                                    <span> {{$data->name}} </span> <br>
+                                    <span> {{$data->phone}} </span> <br>
+                                    <span> {{$data->email}} </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span>-</span> <br>
+                            <span class="badge bg-primary text-white">View Details!</span>
+                        </td>
+                        <td class="align-middle text-center">₹0</td>
+                        <td class="align-middle text-center">
+                            <a href="" class="btn btn-icon btn-outline-success has-ripple" data-toggle="modal" data-target="#cartModal{{$data->id}}"><i class="fas fa-shopping-cart"></i></a>
+                        </td>
+                        <td class="align-middle text-center">
+                            <a href="" class="btn btn-icon btn-outline-danger has-ripple" data-toggle="modal" data-target="#addressModal{{$data->id}}"><i class="fas fa-heart"></i></a>
+                        </td>
                         <td class="align-middle text-center">
                             <a href="" data-toggle="modal" data-target="#addressModal{{$data->id}}" class="btn btn-icon btn-outline-primary has-ripple"><i class="fas fa-map-marker-alt"></i></a>
                         </td>
