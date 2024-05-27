@@ -45,10 +45,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],'checkUserr' => [
             \App\Http\Middleware\CheckUser::class,
-        ], 'NavBar' => [
-            \App\Http\Middleware\NavBar::class,
-        ], 'checkWebUser' => [
-            \App\Http\Middleware\CheckWebUser::class,
+        ], 'AppData' => [
+            \App\Http\Middleware\AppData::class,
         ]
     ];
 

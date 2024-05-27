@@ -22,6 +22,7 @@ return new class extends Migration
                 $table->string('email')->nullable();
                 $table->string('password')->nullable();
                 $table->string('role')->nullable();
+                $table->string('token')->nullable();
                 $table->boolean('status')->default(1);
                 $table->boolean('deleteId')->default(0);
                 $table->timestamps();
@@ -48,8 +49,11 @@ return new class extends Migration
             if (!Schema::hasColumn('users', 'role')) {
                 $table->string('role')->nullable()->after('password');
             }
+            if (!Schema::hasColumn('users', 'token')) {
+                $table->string('token')->nullable()->after('role');
+            }
             if (!Schema::hasColumn('users', 'status')) {
-                $table->boolean('status')->default(1)->after('role');
+                $table->boolean('status')->default(1)->after('token');
             }
             if (!Schema::hasColumn('users', 'deleteId')) {
                 $table->boolean('deleteId')->default(0)->after('status');
