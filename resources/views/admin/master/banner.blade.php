@@ -10,7 +10,7 @@ Banner
 
 @section('content')
 
-<!-- Create Modal Button -->
+<!-- Create Modal Button --> 
 
 <div class=" col-sm-12 text-right">
     <button type="button" id="createBtn" class="btn btn-primary btn-lg m-4 has-ripple" data-toggle="modal" data-target="#addModal">
